@@ -1,0 +1,25 @@
+{% extends 'ORC/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<br>
+<br>
+<body>
+            {% if user.is_authenticated %}
+                <div class="page-container" align="center">
+<br>
+                    <br>
+                    <h1 class="top-menu" style="color:firebrick" align="right"><B>Hello {{ user.username }},</B></h1>
+
+<br>
+                    <br>
+
+                </div>
+            {% endif %}
+
+
+
+    </body>
+
+
+{% endblock %}
