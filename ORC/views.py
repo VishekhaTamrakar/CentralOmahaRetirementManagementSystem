@@ -2,12 +2,9 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import *
-
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
-
-
 
 
 def home(request):
@@ -29,3 +26,14 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+def about(request):
+    return render(request,'ORC/AboutUs.html')
+
+
+def contact(request):
+    return render(request, 'ORC/ContactUs.html')
+
+
+

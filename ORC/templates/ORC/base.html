@@ -14,10 +14,43 @@
             margin-bottom: 0;
             border-radius: 0;
         }
+        .row {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            padding: 10px;
+                }
+        .row img {
+            display: block;
+            max-width: 100%;
+
+        }
+        .home{
+            float: right;
+            padding-left:5%;
+            width: 100%;
+            height: auto;
+        }
+        .column{
+             width: 300px;
+             height: auto;
+        }
+        .paragraph{
+            width: 1200px;
+        }
+        .heading{
+              border-style: solid;
+              border-width: thin;
+              padding: 50px;
+
+        }
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .row.content {
-            height: 450px
+            height: 450px;
+        }
+        background{
+            background-position: right 10px center;
         }
 
         /* Set gray background color and 100% height */
@@ -33,21 +66,19 @@
             color: white;
             padding: 15px;
         }
-
-        /* On small screens, set height to 'auto' for sidenav and grid */
+            /* On small screens, set height to 'auto' for sidenav and grid */
         @media screen and (max-width: 767px) {
             .sidenav {
                 height: auto;
                 padding: 15px;
             }
-
             .row.content {
                 height: auto;
             }
         }
     </style>
 </head>
-<body id="app-layout">
+<body id="app-layout" style="background-color: lavender">
 
 <nav class="navbar navbar-inverse" >
     <div class="container-fluid" >
@@ -77,14 +108,17 @@
                             <span class="glyphicon glyphicon-Home "></span>      <b style="color: #f5dd5d">My Account</b>
                         </a>
                         <ul class="dropdown-menu" role="menu">
+                             <li><a href="{% url 'ORC:about' %}"><b><u>About Us</u></b></a></li>
+                             <li><a href="#"><b><u>Contact Us</u></b></a></li>
+                              <li><a href="#"><span class="fa fa-btn fa-password-reset"></span> password reset</a></li>
                             <li><a href="{% url 'logout' %}"><i class="fa fa-btn fa-sign-out"></i><b><u>Logout</u></b></a></li>
                         </ul>
                     </li>
                 {% else %}
                     <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span><b><u>Login</u></b> </a></li>
-
-                <li><a href="{% url 'ORC:signup' %}"><b><u>Sign Up</u></b></a></li>
-
+                    <<li><a href="{% url 'ORC:about' %}"><b><u>About Us</u></b></a></li>
+                    <<li><a href="#"><b><u>Contact Us</u></b></a></li>
+                    <li><a href="{% url 'ORC:signup' %}"><b><u>Sign Up</u></b></a></li>
                 {% endif %}
 
             </ul>
