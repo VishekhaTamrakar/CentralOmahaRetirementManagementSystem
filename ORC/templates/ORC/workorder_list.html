@@ -1,4 +1,4 @@
-{% extends 'crm/base.html' %}
+{% extends 'ORC/base.html' %}
 {% block content %}
 
 <html>
@@ -11,7 +11,7 @@
 <body>
 <div class="row">
     <h2 style="padding-left: 15Px">Workorder information</h2>
-    <a href="{% url 'crm:product_new' %}" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
+    <a href="{% url 'ORC:workorder_new' %}" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
 
 </div>
 <div>
@@ -22,17 +22,17 @@
             <th>Description</th>
             <th>Priority</th>
             <th>Location</th>
-            <td>Created on</td>
+            <th>Created on</th>
         </tr>
         </thead>
         <tbody>
         {% for wo in workorders %}
             <tr>
-                <td>wo.user</td>
-                <td>wo.woDescription</td>
-                <td>wo.woPriority</td>
-                <td>wo.propertyId</td>
-                <td>wo.woStartDate</td>
+                <td>{{ wo.user }}</td>
+                <td>{{ wo.woDescription }}</td>
+                <td>{{ wo.woPriority }}</td>
+                <td>{{ wo.propertyId }}</td>
+                <td>{{ wo.woStartDate }}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -1,6 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+
 from .models import *
 from .forms import *
 from django.shortcuts import render, get_object_or_404
@@ -40,19 +43,19 @@ def workorder_list(request):
 
 @login_required
 def workorder_new(request):
-   if request.method == "POST":
-       form = WorkorderForm(request.POST)
-       if form.is_valid():
-           newworkorder = form.save(commit=False)
-           newworkorder.created_date = timezone.now()
-           newworkorder.save()
-           workorder = Workorder.objects.filter(created_date__lte=timezone.now())
-           return render(request, 'ORC/workorder_list.html',
-                         {'workorders': workorder})
-   else:
-       form = WorkorderForm()
-       # print("Else")
-   return render(request, 'ORC/workorder_new.html', {'form': form})
+    if request.method == "POST":
+        form = WorkorderForm(request.POST)
+        if form.is_valid():
+            newworkorder = form.save(commit=False)
+            newworkorder.created_date = timezone.now()
+            newworkorder.save()
+            workorders = Workorder.objects.filter(created_date__lte=timezone.now())
+            #return render(request, 'ORC/workorder_list.html', {'workorders': workorders})
+            return HttpResponseRedirect(reverse('ORC:workorder_list'))
+    else:
+        form = WorkorderForm()
+    # print("Else")
+    return render(request, 'ORC/workorder_new.html', {'form': form})
 
 
 @login_required

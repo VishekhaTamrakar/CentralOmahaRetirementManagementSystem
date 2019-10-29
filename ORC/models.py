@@ -28,8 +28,9 @@ class Workorder(models.Model):
     woId = models.IntegerField(blank=False, null=False)
     woDescription = models.CharField(max_length=100, blank=False)
     woPriority=models.CharField(max_length=10,choices=WorkorderPriority,default='low')
-    woStartDate = models.DateTimeField()
-    woEndDate = models.DateTimeField(null=True,blank=True)
+    created_date = models.DateTimeField(default=timezone.now)
+    woStartDate = models.DateTimeField(default=timezone.now)
+    woEndDate = models.DateTimeField(null=True,blank=True, default=timezone.now)
     def __str__(self):
         return str(self.woId)
 

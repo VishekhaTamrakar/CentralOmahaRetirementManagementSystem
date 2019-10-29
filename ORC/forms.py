@@ -1,10 +1,17 @@
 from django import forms
 from .models import Workorder,MaintenanceWork,Equipment,PropertyLocation
 
+class DateTimeInput(forms.DateTimeInput):
+    input_type = 'date'
+
 class WorkorderForm(forms.ModelForm):
     class Meta:
         model = Workorder
         fields = ('user', 'propertyId', 'woId', 'woDescription', 'woPriority', 'woStartDate', 'woEndDate')
+        widgets = {
+            'woStartDate': DateTimeInput(),
+            'woEndDate': DateTimeInput(),
+        }
 
 class MaintenanceWorkForm(forms.ModelForm):
     class Meta:
