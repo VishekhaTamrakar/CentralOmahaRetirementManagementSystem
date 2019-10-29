@@ -2,11 +2,13 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import *
-from .forms import *
+
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
-
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 def home(request):
@@ -28,6 +30,27 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+def about(request):
+    return render(request,'ORC/AboutUs.html')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('login')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'ORC/password_change.html', {
+        'form': form
+    })
 
 
 
@@ -78,3 +101,4 @@ def workorder_delete(request, pk):
    workorder = get_object_or_404(Workorder, pk=pk)
    workorder.delete()
    return redirect('ORC:workorder_list')
+
