@@ -20,14 +20,7 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-   <br>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
+
 
 <div class="container" >
         <div class="row">
@@ -41,11 +34,11 @@
         {% csrf_token %}
 
 
-        <input type="submit" value="login"/>
+        <input type="submit" value="Login"/>
         <input type="hidden" name="next" value="{{ next }}"/>
 
     </form>
-<p><a href="">Forgotten your password?</a></p>
+<p><a href="{% url 'password_reset' %}">Forgotten your password?</a></p>
 </body>
 
 
