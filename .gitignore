@@ -2,6 +2,7 @@
 db.sqlite3
 myvenv
 venv
+env
 __pycache__
 local_settings.py
 .idea/workspace.xml
