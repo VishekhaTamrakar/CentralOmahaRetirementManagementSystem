@@ -7,9 +7,9 @@ from django.urls import reverse_lazy
 app_name = 'ORC'
 urlpatterns = [
 
-    path('', views.home, name='home'),
-    re_path(r'^home/$', views.home, name='home'),
-    url('about/',views.about, name='about'),
+    path('', views.about, name='about'),
+    re_path(r'^home/$', views.about, name='home'),
+    url('about/', views.about, name='about'),
     path('password_reset/', auth_views.PasswordResetView.as_view(success_url=reverse_lazy('ORC:password_reset_done')),
          {'email_template_name': 'registration/password_reset_email.html'}, name='password_reset'),
     path('password_reset/done/',

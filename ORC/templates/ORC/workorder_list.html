@@ -18,31 +18,37 @@
         }
     </style>
 
-    <div class="row">
-        <h1 class ="heading"> Workorder Details</h1>
+    <h1 class ="probootsrap-card-heading"> Workorder Details</h1>
+    <ul class="">
         <a href="{% url 'ORC:workorder_new' %}" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
+    </ul>
 
-    </div>
+
+<div class="content container">
 
     <div class="row" id="events_card">
         {% for wo in workorders %}
-            <div class="col-md-6">
+            <div class="col-md-16"></div>
+            <div class="col-md-5">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-body">
                         <h5 class="card-title">{{ wo.Id }}</h5>
-                        <strong style = "color:#ba2121">Created By</strong><p class="card-text"> {{ wo.user }}</p>
-                        <strong style = "color:#ba2121">Description</strong><p class="card-text">{{ wo.woDescription }}</p>
-                        <strong style = "color:#ba2121">Priority</strong><p class="card-text">{{ wo.woPriority }}</p>
-                        <strong style = "color:#ba2121">Room Number</strong><p class="card-text">{{ wo.roomNumber }}</p>
-                        <strong style = "color:#ba2121">Created Date</strong><p class="card-text">{{ wo.woStartDate }}</p>
+                        <strong style = "color:#ba2121">Created By::</strong><b class="card-text">{{ wo.user }}</b><br>
+                        <strong style = "color:#ba2121">Description::  </strong><b class="card-text">{{ wo.woDescription }}</b><br>
+                        <strong style = "color:#ba2121">Priority::      </strong><b class="card-text">{{ wo.woPriority }}</b><br>
+                        <strong style = "color:#ba2121">Room Number::      </strong><b class="card-text">{{ wo.roomNumber }}</b><br>
+                        <strong style = "color:#ba2121">Created Date::   </strong><b class="card-text">{{ wo.woStartDate }}</b><br>
                         {%  if wo.is_open %}
-                            <strong style = "color:#ba2121">Status</strong><span class="badge badge-success">Open</span>
+                            <strong style = "color:#ba2121">Status::  </strong><b class="badge badge-success">Open</b>
                         {% else %}
-                            <span class="badge badge-danger">Closed</span>
+                            <strong style = "color:#ba2121">Status::  </strong><span class="badge badge-danger">Closed</span>
                         {% endif %}
                     </div>
                 </div>
             </div>
+
         {% endfor %}
     </div>
+  </div>
+
 {% endblock %}
