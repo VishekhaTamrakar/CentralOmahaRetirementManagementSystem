@@ -1,43 +1,54 @@
 {% extends 'ORC/base.html' %}
 {% block content %}
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>ORC</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-</head>
-<body>
-<div class="row">
-    <h2 style="padding-left: 15Px">Workorder information</h2>
-    <a href="{% url 'ORC:workorder_new' %}" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-</div>
-<div>
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-        <tr class="bg-info">
-            <th>Created by</th>
-            <th>Description</th>
-            <th>Priority</th>
-            <th>Location</th>
-            <th>Created on</th>
-        </tr>
-        </thead>
-        <tbody>
+
+    <style>
+        body,html{
+            height: 100%;
+            margin: 0;
+            background: #7F7FD5;
+            background: -webkit-linear-gradient(to right, #eacda3, #d6ae7b);
+            background: linear-gradient(to right, #eacda3, #d6ae7b);
+        }
+        #events_card{
+            padding-bottom: 40px;
+        }
+    </style>
+
+    <h1 class ="probootsrap-card-heading"> Workorder Details</h1>
+    <ul class="">
+        <a href="{% url 'ORC:workorder_new' %}" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
+    </ul>
+
+
+<div class="content container">
+
+    <div class="row" id="events_card">
         {% for wo in workorders %}
-            <tr>
-                <td>{{ wo.user }}</td>
-                <td>{{ wo.woDescription }}</td>
-                <td>{{ wo.woPriority }}</td>
-                <td>{{ wo.propertyId }}</td>
-                <td>{{ wo.woStartDate }}</td>
-            </tr>
+            <div class="col-md-16"></div>
+            <div class="col-md-5">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ wo.Id }}</h5>
+                        <strong style = "color:#ba2121">Created By::</strong><b class="card-text">{{ wo.user }}</b><br>
+                        <strong style = "color:#ba2121">Description::  </strong><b class="card-text">{{ wo.woDescription }}</b><br>
+                        <strong style = "color:#ba2121">Priority::      </strong><b class="card-text">{{ wo.woPriority }}</b><br>
+                        <strong style = "color:#ba2121">Room Number::      </strong><b class="card-text">{{ wo.roomNumber }}</b><br>
+                        <strong style = "color:#ba2121">Created Date::   </strong><b class="card-text">{{ wo.woStartDate }}</b><br>
+                        {%  if wo.is_open %}
+                            <strong style = "color:#ba2121">Status::  </strong><b class="badge badge-success">Open</b>
+                        {% else %}
+                            <strong style = "color:#ba2121">Status::  </strong><span class="badge badge-danger">Closed</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
         {% endfor %}
-        </tbody>
-    </table>
-</div>
-</body>
-</html>
+    </div>
+  </div>
+
 {% endblock %}
