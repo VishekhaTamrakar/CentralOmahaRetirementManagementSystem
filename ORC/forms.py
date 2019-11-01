@@ -7,7 +7,7 @@ class DateTimeInput(forms.DateTimeInput):
 class WorkorderForm(forms.ModelForm):
     class Meta:
         model = Workorder
-        fields = ('user', 'propertyId', 'woId', 'woDescription', 'woPriority', 'woStartDate', 'woEndDate')
+        fields = ('user', 'roomNumber', 'woId', 'woDescription', 'woPriority', 'woStartDate', 'woEndDate','is_open')
         widgets = {
             'woStartDate': DateTimeInput(),
             'woEndDate': DateTimeInput(),
@@ -16,7 +16,7 @@ class WorkorderForm(forms.ModelForm):
 class MaintenanceWorkForm(forms.ModelForm):
     class Meta:
         model = MaintenanceWork
-        fields = ('mwId','mwDescription','mwStartDateTime','mwEndDateTime','mwWorkCost','user','woId')
+        fields = ('mwId','woId', 'mwDescription','mwWorkCost','user','mwStartDateTime','mwEndDateTime','is_open')
 
 class EquipmentForm(forms.ModelForm):
     class Meta:
@@ -26,4 +26,4 @@ class EquipmentForm(forms.ModelForm):
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = PropertyLocation
-        fields = ('propertyId','propertyName','address','buildingNumber','city','state','zipCode')
+        fields = ('propertyId','propertyName','address','roomNumber','city','state','zipCode')

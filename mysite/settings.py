@@ -39,11 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'bootstrap4',
 ]
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'asad.team3'
-EMAIL_HOST_PASSWORD = 'sarath08'
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'postmaster@sandbox18f892939a5b44079f5504ecdd1d3b42.mailgun.org'
+EMAIL_HOST_PASSWORD = 'addc739660028a4fd7a3513303fcc0ea-816b23ef-a0a682cb'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

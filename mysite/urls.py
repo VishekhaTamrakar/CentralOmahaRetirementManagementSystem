@@ -34,3 +34,8 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
     path('reset/done/',auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
 ]
+
+
+admin.site.site_header = "Omaha Retirement Centre"
+admin.site.site_title = "Omaha Retirement Centre Admin"
+admin.site.site_index_title = "Welcome to Omaha Retirement Centre"
