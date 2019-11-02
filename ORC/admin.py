@@ -3,10 +3,10 @@ from .models import *
 
 # Register your models here.
 class PropertyLocationList(admin.ModelAdmin):
-    list_display = ( 'roomNumber', 'propertyName' )
-    list_filter = ( 'roomNumber', 'propertyName')
-    search_fields = ('roomNumber', )
-    ordering = ['roomNumber']
+    list_display = ('propertyId', 'propertyName')
+    list_filter = ('propertyId', 'propertyName')
+    search_fields = ('propertyId',)
+    ordering = ['propertyId']
 
 class MaintenanceWorkList(admin.ModelAdmin):
     list_display = ( 'mwId', 'mwDescription','woId' )
