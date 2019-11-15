@@ -29,10 +29,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+AUTH_USER_MODEL = 'ORC.User'
 
 # Application definition
 
 INSTALLED_APPS = [
+
     'ORC',
     'django.contrib.admin',
     'django.contrib.auth',

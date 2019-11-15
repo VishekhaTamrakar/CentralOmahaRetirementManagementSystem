@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
 
 marital_status = (
         ('--', "--"),
@@ -8,9 +10,31 @@ marital_status = (
         ('Married', "Married"),
 )
 
+
+class User(AbstractUser):
+    @property
+    def is_admin(self):
+        if hasattr(self, 'staff'):
+            return True
+        return False
+
+    @property
+    def is_player(self):
+        if hasattr(self, 'maintenanaceworker'):
+            return True
+        return False
+
+    @property
+    def is_resident(self):
+            if hasattr(self, 'resident'):
+                return True
+            return False
+
+
 # Create your models here.
 class Resident(models.Model):
     resident_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     resident_name = models.CharField(max_length=50)
     resident_occupation = models.CharField(max_length=50)
     resident_emailaddress=models.CharField(max_length=50)
@@ -37,6 +61,7 @@ class Resident(models.Model):
 
 class MaintenanceWorker(models.Model):
     worker_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     maintenanceworker_name = models.CharField(max_length=50)
     worker_emailaddress=models.CharField(max_length=50)
     worker_address=models.CharField(max_length=50)
@@ -61,6 +86,7 @@ class MaintenanceWorker(models.Model):
 
 class Staff(models.Model):
     staff_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     staff_name = models.CharField(max_length=50)
     staff_emailaddress=models.CharField(max_length=50)
     staff_address=models.CharField(max_length=50)

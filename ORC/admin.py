@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Resident,MaintenanceWorker,Staff,Workorder,Equipment,MaintenanceWork,Roomallotment
+from .models import Resident,MaintenanceWorker,Staff,Workorder,Equipment,MaintenanceWork,Roomallotment, User
+from django.contrib.auth.admin import UserAdmin
+
+
+admin.site.register(User, UserAdmin)
+
 
 class ResidentList(admin.ModelAdmin):
     list_display = ( 'resident_id', 'resident_name')
