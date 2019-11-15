@@ -1,6 +1,28 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    @property
+    def is_orc_staff(self):
+        if hasattr(self, 'orc_staff'):
+            return True
+        return False
+
+    @property
+    def is_resident(self):
+        if hasattr(self, 'resident'):
+            return True
+        return False
+
+    @property
+    def is_maintenanceworker(self):
+        if hasattr(self, 'maintenanceworker'):
+            return True
+        return False
+
 
 marital_status = (
         ('--', "--"),
@@ -11,6 +33,7 @@ marital_status = (
 # Create your models here.
 class Resident(models.Model):
     resident_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     resident_name = models.CharField(max_length=50)
     resident_occupation = models.CharField(max_length=50)
     resident_emailaddress=models.CharField(max_length=50)
@@ -35,8 +58,13 @@ class Resident(models.Model):
     def __str__(self):
         return str(self.resident_name)
 
+    class Meta:
+        verbose_name = 'Resident'
+        verbose_name_plural = 'Resident'
+
 class MaintenanceWorker(models.Model):
     worker_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     maintenanceworker_name = models.CharField(max_length=50)
     worker_emailaddress=models.CharField(max_length=50)
     worker_address=models.CharField(max_length=50)
@@ -59,17 +87,22 @@ class MaintenanceWorker(models.Model):
     def __str__(self):
         return str(self.maintenanceworker_name)
 
-class Staff(models.Model):
-    staff_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
-    staff_name = models.CharField(max_length=50)
-    staff_emailaddress=models.CharField(max_length=50)
-    staff_address=models.CharField(max_length=50)
-    staff_yearsofexperience=models.IntegerField()
-    staff_contactdetails=models.CharField(max_length=10)
-    staff_position=models.CharField(max_length=50)
-    staff_startdate=models.DateField()
-    staff_enddate=models.DateField()
-    created_date = models.DateField(
+    class Meta:
+        verbose_name = 'MaintenanceWorker'
+        verbose_name_plural = 'MaintenanceWorker'
+
+class Orc_Staff(models.Model):
+    orc_staff_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    orc_staff_name = models.CharField(max_length=50)
+    orc_staff_emailaddress=models.CharField(max_length=50)
+    orc_staff_address=models.CharField(max_length=50)
+    orc_staff_yearsofexperience=models.IntegerField()
+    orc_staff_contactdetails=models.CharField(max_length=10)
+    orc_staff_position=models.CharField(max_length=50)
+    orc_staff_startdate=models.DateField()
+    orc_staff_enddate=models.DateField()
+    orc_created_date = models.DateField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
 
@@ -82,8 +115,11 @@ class Staff(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.staff_name)
+        return str(self.orc_staff_name)
 
+    class Meta:
+        verbose_name = 'Orc_Staff'
+        verbose_name_plural = 'Orc_Staff'
 
 
 Floor=(
@@ -166,6 +202,11 @@ class Roomallotment(models.Model):
     def __str__(self):
         return str(self.property_number)
 
+    class Meta:
+        verbose_name = 'Roomallotment'
+        verbose_name_plural = 'Roomallotment'
+
+
 priority_level = (
         ('--', '--'),
         ('Low', 'Low'),
@@ -208,7 +249,9 @@ class Workorder(models.Model):
     def __str__(self):
         return str(self.workorder_id)
 
-
+    class Meta:
+        verbose_name = 'Workorder'
+        verbose_name_plural = 'Workorder'
 
 
 class Equipment(models.Model):
@@ -233,6 +276,10 @@ class Equipment(models.Model):
 
     def __str__(self):
         return str(self.equipment_name)
+
+    class Meta:
+        verbose_name = 'Equipment'
+        verbose_name_plural = 'Equipment'
 
 
 class MaintenanceWork(models.Model):
@@ -262,3 +309,6 @@ class MaintenanceWork(models.Model):
     def __str__(self):
         return str(self.maintenancework_id)
 
+    class Meta:
+        verbose_name = 'MaintenanceWork'
+        verbose_name_plural = 'MaintenanceWork'

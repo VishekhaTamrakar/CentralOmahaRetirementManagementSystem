@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Resident,MaintenanceWorker,Staff,Workorder,Equipment,MaintenanceWork,Roomallotment
+from .models import Resident,MaintenanceWorker,Orc_Staff,Workorder,Equipment,MaintenanceWork,Roomallotment,User
+from django.contrib.auth.admin import UserAdmin
+
+
+admin.site.register(User, UserAdmin)
 
 class ResidentList(admin.ModelAdmin):
     list_display = ( 'resident_id', 'resident_name')
@@ -18,12 +22,12 @@ class MaintenanceWorkerList(admin.ModelAdmin):
 admin.site.register(MaintenanceWorker,MaintenanceWorkerList)
 
 class StaffList(admin.ModelAdmin):
-    list_display = ( 'staff_id', 'staff_name')
-    list_filter = ( 'staff_id', 'staff_name')
-    search_fields = ('staff_id','staff_name')
-    ordering = ['staff_id']
+    list_display = ( 'orc_staff_id', 'orc_staff_name')
+    list_filter = ( 'orc_staff_id', 'orc_staff_name')
+    search_fields = ('orc_staff_id','orc_staff_name')
+    ordering = ['orc_staff_id']
 
-admin.site.register(Staff,StaffList)
+admin.site.register(Orc_Staff,StaffList)
 
 
 class WorkorderList(admin.ModelAdmin):

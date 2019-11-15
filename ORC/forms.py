@@ -1,5 +1,5 @@
 from django import forms
-from .models import Resident,MaintenanceWorker,Staff,Equipment,MaintenanceWork,Roomallotment
+from .models import Resident,MaintenanceWorker,Orc_Staff,Equipment,MaintenanceWork,Roomallotment
 
 class ResidentForm(forms.ModelForm):
     class Meta:
@@ -13,10 +13,10 @@ class MaintenanceworkerForm(forms.ModelForm):
         fields = ('worker_id', 'maintenanceworker_name', 'worker_emailaddress', 'worker_address','worker_yearsofexperience','worker_contactdetails','workerstartdate','worker_enddate')
 
 
-class Staff(forms.ModelForm):
+class Orc_Staff(forms.ModelForm):
     class Meta:
-        model = Staff
-        fields = ('staff_id', 'staff_name', 'staff_emailaddress', 'staff_address','staff_yearsofexperience', 'staff_contactdetails','staff_position','staff_startdate','staff_enddate')
+        model = Orc_Staff
+        fields = ('orc_staff_id', 'orc_staff_name', 'orc_staff_emailaddress', 'orc_staff_address','orc_staff_yearsofexperience', 'orc_staff_contactdetails','orc_staff_position','orc_staff_startdate','orc_staff_enddate')
 
 
 class Workorder(forms.ModelForm):
