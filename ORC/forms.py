@@ -22,7 +22,7 @@ class Staff(forms.ModelForm):
 class Workorder(forms.ModelForm):
     class Meta:
         model = Workorder
-        fields = ('resident_name', 'workorder_id', 'workorder_Description', 'workorder_category','workorder_priority', 'workorder_opendate','workorder_duedate','workorder_closedate','is_open')
+        fields = ('resident_name', 'workorder_id', 'workorder_Description', 'workorder_category','workorder_priority','property_number', 'workorder_opendate','workorder_duedate','workorder_closedate','is_open')
 
 
 class Equipment(forms.ModelForm):
@@ -33,9 +33,9 @@ class Equipment(forms.ModelForm):
 class MaintenanceWork(forms.ModelForm):
     class Meta:
         model = MaintenanceWork
-        fields = ('maintenancework_id', 'maintenacework_title', 'maintenancework_description', 'workorder_id','maintenanceworker_name','property_number','equipment_name','maintenancework_cost','maintenancework_opendate','maintenancework_duedate','is_open','maintenanceworkr_closedate')
+        fields = ('maintenancework_id','maintenancework_description', 'workorder_id','maintenanceworker_name','property_number','equipment_name','maintenancework_cost','maintenancework_opendate','maintenancework_duedate','is_open','maintenancework_closedate')
 
 class Roomallotment(forms.ModelForm):
     class Meta:
         model = Roomallotment
-        fields = ('allotment_id', 'resident_name', 'property_number', 'allotment_startdate','allotment_enddate')
+        fields = ('allotment_id', 'resident_name', 'property_number', 'property_floor','allotment_startdate','allotment_enddate')

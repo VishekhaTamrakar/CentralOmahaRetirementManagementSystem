@@ -7,4 +7,3 @@ __pycache__
 local_settings.py
 .idea/workspace.xml
 .DS_Store
-ORC/migrations/*.py
