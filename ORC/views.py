@@ -36,7 +36,31 @@ def signup(request):
 
 
 def about(request):
-    return render(request,'ORC/AboutUs.html')
+    return render(request, 'ORC/AboutUs.html')
+
+
+def workorder_list(request):
+    return render(request, 'ORC/workorder_list.html')
+
+
+def property_list(request):
+    return render(request, 'ORC/property_list.html')
+
+
+def maintenancework_list(request):
+    return render(request, 'ORC/maintenancework_list.html')
+
+
+def resident_list(request):
+    return render(request, 'ORC/resident_list.html')
+
+
+def maintenance_worker_list(request):
+    return render(request, 'ORC/maintenance_worker_list.html')
+
+
+def staff_list(request):
+    return render(request, 'ORC/staff_list.html')
 
 
 def change_password(request):
