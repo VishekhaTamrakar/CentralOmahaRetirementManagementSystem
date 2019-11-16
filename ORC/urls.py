@@ -26,6 +26,13 @@ urlpatterns = [
     path('password_change/done/',auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     url(r'^password/$', views.change_password, name='change_password'),
     url(r'^signup/$', ORC_views.signup, name='signup'),
+    url('workorder_list/', views.workorder_list, name = 'workorder_list'),
+    url('property_list/', views.property_list, name='property_list'),
+    url('resident_list/', views.resident_list, name='resident_list'),
+    url('maintenacework_list/', views.maintenancework_list, name='maintenancework_list'),
+    url('maintenance_worker_list/', views.maintenance_worker_list, name='maintenance_worker_list'),
+    url('staff_list/', views.staff_list, name='staff_list')
+
 
 
 
