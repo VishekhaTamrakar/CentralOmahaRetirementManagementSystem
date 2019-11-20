@@ -21,28 +21,33 @@
 
     <h1 class ="probootsrap-card-heading"> Workorder Details</h1><br>
     <ul class="">
-        <a href="#" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
+        <a href="{% url 'ORC:workorder_new' %}" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
     </ul>
 
     <div class="content container">
 
     <div class="row" id="events_card">
-        {% for wo in workorders %}
+        {% for wo in workorder %}
             <div class="col-md-16"></div>
             <div class="col-md-5">
                 <div class="card text-white bg-dark mb-3">
                     <div class="card-body">
-                         <h5 class="card-title">{{ wo.workorder_id }}</h5>
+                         <h5 class="card-title">Workorder ID: {{ wo.workorder_id }}</h5>
                             <strong style = "color:#ba2121">Created By::</strong><b class="card-text">{{ wo.resident_name }}</b><br>
                             <strong style = "color:#ba2121">Description::  </strong><b class="card-text">{{ wo.workorder_description }}</b><br>
                             <strong style = "color:#ba2121">Priority::      </strong><b class="card-text">{{ wo.workorder_priority }}</b><br>
                             <strong style = "color:#ba2121">Room Number::      </strong><b class="card-text">{{ wo.property_number }}</b><br>
-                            <strong style = "color:#ba2121">Created Date::   </strong><b class="card-text">{{ wo.createdate }}</b><br>
+                            <strong style = "color:#ba2121">Created Date::   </strong><b class="card-text">{{ wo.workorder_opemdate }}</b><br>
                         {%  if wo.is_open %}
                             <strong style = "color:#ba2121">Status::  </strong><b class="badge badge-success">Open</b>
                         {% else %}
                             <strong style = "color:#ba2121">Status::  </strong><span class="badge badge-danger">Closed</span>
                         {% endif %}
+                            <br><br>
+                            <td><a href="#"  class="btn btn-danger">Delete</a></td>
+
+                            <td><a href="#" class="btn btn-warning">Edit</a></td>
+
                     </div>
                 </div>
             </div>

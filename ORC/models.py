@@ -70,7 +70,7 @@ class MaintenanceWorker(models.Model):
     worker_address=models.CharField(max_length=50)
     worker_yearsofexperience=models.IntegerField()
     worker_contactdetails=models.CharField(max_length=10)
-    worker_startdate=models.DateTimeField()
+    worker_startdate=models.DateField()
     worker_enddate=models.DateField()
     created_date = models.DateField(
         default=timezone.now)
@@ -102,7 +102,7 @@ class Orc_Staff(models.Model):
     orc_staff_position=models.CharField(max_length=50)
     orc_staff_startdate=models.DateField()
     orc_staff_enddate=models.DateField()
-    orc_created_date = models.DateField(
+    created_date = models.DateField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
 
@@ -190,6 +190,9 @@ class Roomallotment(models.Model):
     property_floor=models.CharField(max_length=50,choices=Floor,default='--')
     allotment_startdate=models.DateTimeField()
     allotment_enddate=models.DateTimeField()
+    created_date = models.DateField(
+        default=timezone.now)
+    updated_date = models.DateTimeField(auto_now_add=True)
 
     def created(self):
         self.created_date = timezone.now()

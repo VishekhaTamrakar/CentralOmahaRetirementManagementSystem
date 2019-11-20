@@ -11,7 +11,7 @@
 {#<nav class="navbar navbar-dark bg-dark">#}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'ORC:about' %}">Omaha Retirement Centre</a>
+    <a class="navbar-brand" href="{% url 'ORC:about' %}"><h1>Omaha Retirement Centre </h1></a>
     <div id="wrapper">
 
       <!-- Sidebar -->
@@ -47,8 +47,14 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'ORC:staff_list' %}">
+              <a class="nav-link" href="{% url 'ORC:orc_staff_list' %}">
                 <span>Staff Details</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'ORC:equipment_list' %}">
+                <span>Equipment Details</span>
               </a>
             </li>
          {% elif request.user.is_maintenanceworker %}
@@ -56,6 +62,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'ORC:maintenancework_list' %}">
                 <span>Maintenance Work Details</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'ORC:equipment_list' %}">
+                <span>Equipment Details</span>
               </a>
             </li>
 
@@ -84,7 +95,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 {% if request.user.is_orc_staff %}
-                    <a class="navbar-brand mr-1" href="#">Hi I am Staff</a>
+                    <a class="navbar-brand" href="#">Hi I am Staff</a>
                     <a class="nav-link text-capitalize">{{ request.user.orc_staff.orc_staff_name }}</a>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: white">
@@ -96,7 +107,7 @@
                         </ul>
                     </li>
                 {% elif request.user.is_resident %}
-                    <a class="navbar-brand mr-1" href="#">Hi I am Resident</a>
+                    <a class="navbar-brand" href="#">Hi I am Resident</a>
                     <a class="nav-link text-capitalize">{{ request.user.resident.resident_name }}</a>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: white">
@@ -108,7 +119,7 @@
                         </ul>
                     </li>
                 {% elif request.user.is_maintenanceworker %}
-                     <a class="navbar-brand mr-1" href="#">Hi I am Maintenance Worker</a>
+                     <a class="navbar-brand" href="#">Hi I am Maintenance Worker</a>
                     <a class="nav-link text-capitalize">{{ request.user.maintenanceworker.maintenanceworker_name }}</a>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: white">
@@ -120,8 +131,8 @@
                         </ul>
                     </li>
                 {% else %}
-                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                    <a class="nav-item nav-link" href="{% url 'ORC:signup' %}">Sign Up</a>
+                    <h2><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></h2>
+
                 {% endif %}
              </li>
         </ul>
