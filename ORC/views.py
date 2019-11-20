@@ -92,9 +92,50 @@ def property_delete(request, pk):
    roomallotment.delete()
    return redirect('ORC:property_list')
 
-
+@login_required
 def maintenancework_list(request):
-    return render(request, 'ORC/maintenancework_list.html')
+    maintenancework = MaintenanceWork.objects.filter(created_date__lte=timezone.now())
+    return render(request, 'ORC/maintenancework_list.html',
+                  {'maintenanceworks': maintenancework})
+@login_required
+def maintenancework_new(request):
+   if request.method == "POST":
+       form = MaintenanceWorkForm(request.POST)
+       if form.is_valid():
+           maintenancework = form.save(commit=False)
+           maintenancework.created_date = timezone.now()
+           maintenancework.save()
+           ##maintenanceworks = MaintenanceWork.objects.filter(created_date__lte=timezone.now())
+           return HttpResponseRedirect(reverse('ORC:maintenancework_list'))
+
+   else:
+       form = MaintenanceWorkForm()
+       print(form)
+       # print("Else")
+       return render(request, 'ORC/maintenancework_new.html', {'form': form})
+
+@login_required
+def maintenancework_edit(request, pk):
+   maintenancework = get_object_or_404(MaintenanceWork, pk=pk)
+   if request.method == "POST":
+       form = MaintenanceWorkForm(request.POST, instance=maintenancework)
+       if form.is_valid():
+           maintenancework = form.save()
+           maintenancework.updated_date = timezone.now()
+           maintenancework.save()
+           maintenancework = MaintenanceWork.objects.filter(created_date__lte=timezone.now())
+           return render(request, 'ORC/maintenancework_list.html', {'maintenanceworks': maintenancework})
+   else:
+       # print("else")
+       form = MaintenanceWorkForm(instance=maintenancework)
+   return render(request, 'ORC/maintenancework_edit.html', {'form': form})
+
+
+@login_required
+def maintenancework_delete(request, pk):
+   maintenancework = get_object_or_404(MaintenanceWork, pk=pk)
+   maintenancework.delete()
+   return redirect('ORC:maintenancework_list')
 
 
 
@@ -335,7 +376,7 @@ def workorder_list(request): #resident_id):
 @login_required
 def workorder_new(request):
     if request.method == "POST":
-        form = Workorder(request.POST)
+        form = WorkorderForm(request.POST)
         if form.is_valid():
             newworkorder = form.save(commit=False)
             newworkorder.created_date = timezone.now()
@@ -344,7 +385,7 @@ def workorder_new(request):
             #return render(request, 'ORC/workorder_list.html', {'workorders': workorders})
             return HttpResponseRedirect(reverse('ORC:workorder_list'))
     else:
-        form = Workorder()
+        form = WorkorderForm()
     # print("Else")
     return render(request, 'ORC/workorder_new.html', {'form': form})
 

@@ -36,7 +36,6 @@ urlpatterns = [
     path('resident/new/', views.resident_new, name='resident_new'),
     path('resident/<int:pk>/edit/', views.resident_edit, name='resident_edit'),
     path('resident/<int:pk>/delete/', views.resident_delete, name='resident_delete'),
-    url('maintenacework_list/', views.maintenancework_list, name='maintenancework_list'),
     url('maintenance_worker_list/', views.maintenance_worker_list, name='maintenance_worker_list'),
     path('maintenance_worker/new/', views.maintenance_worker_new, name='maintenance_worker_new'),
     path('maintenance_worker/<int:pk>/edit/', views.maintenance_worker_edit, name='maintenance_worker_edit'),
@@ -49,7 +48,11 @@ urlpatterns = [
     path('orc_staff/new/', views.orc_staff_new, name='orc_staff_new'),
     path('orc_staff/<int:pk>/edit/', views.orc_staff_edit, name='orc_staff_edit'),
     path('orc_staff/<int:pk>/delete/', views.orc_staff_delete, name='orc_staff_delete'),
-    url('staff_list/', views.staff_list, name='staff_list'),
+    path('maintenancework_list/', views.maintenancework_list, name='maintenancework_list'),
+    path('maintenancework/new/', views.maintenancework_new, name='maintenancework_new'),
+    path('maintenancework/<int:pk>/edit/', views.maintenancework_edit, name='maintenancework_edit'),
+    path('maintenancework/<int:pk>/delete/', views.maintenancework_delete, name='maintenancework_delete'),
+    #url('staff_list/', views.staff_list, name='staff_list'),
 
 ]
 
