@@ -296,7 +296,7 @@ class MaintenanceWork(models.Model):
     maintenancework_opendate=models.DateTimeField()
     maintenancework_duedate = models.DateTimeField()
     is_open=models.BooleanField(default=True, blank=False, null=False)
-    maintenancework_closedate=models.DateTimeField()
+    maintenancework_closedate=models.DateTimeField(blank=True, null=True)
     created_date = models.DateField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
