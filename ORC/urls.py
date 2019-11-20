@@ -49,7 +49,7 @@ urlpatterns = [
     path('orc_staff/new/', views.orc_staff_new, name='orc_staff_new'),
     path('orc_staff/<int:pk>/edit/', views.orc_staff_edit, name='orc_staff_edit'),
     path('orc_staff/<int:pk>/delete/', views.orc_staff_delete, name='orc_staff_delete'),
-
+    url('staff_list/', views.staff_list, name='staff_list'),
 
 ]
 
