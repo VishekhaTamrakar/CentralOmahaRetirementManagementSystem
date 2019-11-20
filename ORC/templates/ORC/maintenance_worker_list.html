@@ -1,24 +1,91 @@
-{% extends 'ORC/base.html' %}
-{% block content %}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   {% block content %}
 
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
+    </head>
+    <body>
     <style>
-        body,html{
-            height: 100%;
-            margin: 0;
-            background: #7F7FD5;
-            background: -webkit-linear-gradient(to right, #ffffff, #ffffff);
-            background: linear-gradient(to right, #ffffff, #de9404);
-        }
-        #events_card{
-            padding-bottom: 40px;
+        body {
+            background-color: ghostwhite ;
+            background-image: url("") ;
         }
     </style>
+    <br>
+      <br>
+      <br>
+
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'ORC:about' %}"><h1><u>Omaha Retirement Centre</a></h1></u>
+    <div id="wrapper">
 
 
 
-    <h1 class ="probootsrap-card-heading"> Maintenance Worker Details</h1><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-{%  endblock %}
+
+        <h2  style="color:firebrick" align="center" ><b><i>Maintenance Worker Details</b></i></h2>
+    <br>
+
+        <table class="table table-bordered" style="background-color:white">
+            <thead>
+                        <tr class="bg-info" style="background:white">
+                <th>Maintenance Worker Id</th>
+                <th>User Name</th>
+                <th>Maintenance Worker Name</th>
+                <th>Maintenance Worker Email Address</th>
+                <th>Maintenance Worker Address</th>
+                <th>Maintenance Worker Years Of Experience</th>
+                <th>Maintenance Worker Contact Details</th>
+                <th>Maintenance Worker Start Date</th>
+                <th>Maintenance Worker End Date</th>
+
+
+
+
+                <th colspan="9" >Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for maintenanceworker in maintenanceworkers %}
+                <tr>
+
+                    <td>{{ maintenanceworker.worker_id}}</td>
+                    <td>{{ maintenanceworker.user}}</td>
+                    <td>{{ maintenanceworker.maintenanceworker_name }}</td>
+                    <td>{{ maintenanceworker.worker_emailaddress }}</td>
+                    <td>{{ maintenanceworker.worker_address }}</td>
+                    <td>{{ maintenanceworker.worker_yearsofexperience }}</td>
+                    <td>{{ maintenanceworker.worker_contactdetails }}</td>
+                    <td>{{ maintenanceworker.worker_startdate }}</td>
+                    <td>{{ maintenanceworker.worker_enddate }}</td>
+
+
+                        <td><a href="{% url 'ORC:maintenance_worker_edit' pk=maintenanceworker.pk%}" class="btn btn-warning">Edit</a>
+
+
+<td><a href="{% url 'ORC:maintenance_worker_delete' pk=maintenanceworker.pk%}" onclick="return confirm ('Are you sure you want to delete?')"
+                  class="btn btn-danger">Delete</a>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+        </table>
+ <td><a href="{% url 'ORC:maintenance_worker_new' %}"
+                           class="btn btn-primary">Add New Maintenance Worker</a>
+    </body>
+    </html>
+{% endblock %}
