@@ -1,0 +1,54 @@
+{% extends 'ORC/base.html' %}
+{% block content %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <style>
+        body,html{
+            height: 100%;
+            margin: 0;
+            background: #7F7FD5;
+            background: -webkit-linear-gradient(to right, #ffffff, #ffffff);
+            background: linear-gradient(to right, #ffffff, #de9404);
+        }
+        #events_card{
+            padding-bottom: 40px;
+        }
+    </style>
+
+
+
+    <h1 class ="probootsrap-card-heading"> Workorder Details</h1><br>
+    <ul class="">
+        <a href="#" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
+    </ul>
+
+    <div class="content container">
+
+    <div class="row" id="events_card">
+        {% for wo in workorders %}
+            <div class="col-md-16"></div>
+            <div class="col-md-5">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-body">
+                         <h5 class="card-title">{{ wo.workorder_id }}</h5>
+                            <strong style = "color:#ba2121">Created By::</strong><b class="card-text">{{ wo.resident_name }}</b><br>
+                            <strong style = "color:#ba2121">Description::  </strong><b class="card-text">{{ wo.workorder_description }}</b><br>
+                            <strong style = "color:#ba2121">Priority::      </strong><b class="card-text">{{ wo.workorder_priority }}</b><br>
+                            <strong style = "color:#ba2121">Room Number::      </strong><b class="card-text">{{ wo.property_number }}</b><br>
+                            <strong style = "color:#ba2121">Created Date::   </strong><b class="card-text">{{ wo.createdate }}</b><br>
+                        {%  if wo.is_open %}
+                            <strong style = "color:#ba2121">Status::  </strong><b class="badge badge-success">Open</b>
+                        {% else %}
+                            <strong style = "color:#ba2121">Status::  </strong><span class="badge badge-danger">Closed</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}
