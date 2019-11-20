@@ -324,7 +324,6 @@ def change_password(request):
 
 @login_required
 def workorder_list(request): #resident_id):
-    if request.user.is_orc_staff:
         workorder = Workorder.objects.filter()
         return render(request, 'ORC/workorder_list.html', {'workorder': workorder})
     #if request.user.is_resident:
@@ -335,16 +334,40 @@ def workorder_list(request): #resident_id):
 @login_required
 def workorder_new(request):
     if request.method == "POST":
-        form = Workorder(request.POST)
+        form = WorkorderForm(request.POST)
         if form.is_valid():
             newworkorder = form.save(commit=False)
             newworkorder.created_date = timezone.now()
             newworkorder.save()
-            workorders = Workorder.objects.filter(created_date__lte=timezone.now())
-            #return render(request, 'ORC/workorder_list.html', {'workorders': workorders})
-            return HttpResponseRedirect(reverse('ORC:workorder_list'))
+            workorder = Workorder.objects.filter(created_date__lte=timezone.now())
+            return render(request, 'ORC/workorder_list.html',
+                          {'workorder': workorder})
+            #return HttpResponseRedirect(reverse('ORC:workorder_list'))
     else:
-        form = Workorder()
+        form = WorkorderForm()
     # print("Else")
     return render(request, 'ORC/workorder_new.html', {'form': form})
 
+@login_required
+def workorder_edit(request, pk):
+   workorder = get_object_or_404(Workorder, pk=pk)
+   if request.method == "POST":
+       # update
+       form = WorkorderForm(request.POST, instance=workorder)
+       if form.is_valid():
+           editworkorder = form.save(commit=False)
+           editworkorder.updated_date = timezone.now()
+           editworkorder.save()
+           workorder = Workorder.objects.filter(created_date__lte=timezone.now())
+           return render(request, 'ORC/workorder_list.html',
+                         {'workorder': workorder})
+   else:
+        # edit
+       form = WorkorderForm(instance=workorder)
+   return render(request, 'ORC/workorder_edit.html', {'form': form})
+
+@login_required
+def workorder_delete(request, pk):
+   workorder = get_object_or_404(Workorder, pk=pk)
+   workorder.delete()
+   return redirect('ORC:workorder_list')
