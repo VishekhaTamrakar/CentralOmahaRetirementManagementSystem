@@ -26,8 +26,10 @@ urlpatterns = [
     path('password_change/done/',auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     url(r'^password/$', views.change_password, name='change_password'),
     url(r'^signup/$', ORC_views.signup, name='signup'),
-    url('workorder_list/', views.workorder_list, name = 'workorder_list'),
-    url('workorder/new/', views.workorder_new, name='workorder_new'),
+    url('workorder_list/', views.workorder_list, name='workorder_list'),
+    path('workorder/new/', views.workorder_new, name='workorder_new'),
+    #path('workorder/<int:pk>/edit/', views.workorder_edit, name='workorder_edit'),
+    #path('workorder/<int:pk>/delete/', views.workorder_delete, name='workorder_delete'),
     url('property_list/', views.property_list, name='property_list'),
     path('property/new/', views.property_new, name='property_new'),
     path('property/<int:pk>/edit/', views.property_edit, name='property_edit'),
@@ -52,7 +54,5 @@ urlpatterns = [
     path('maintenancework/new/', views.maintenancework_new, name='maintenancework_new'),
     path('maintenancework/<int:pk>/edit/', views.maintenancework_edit, name='maintenancework_edit'),
     path('maintenancework/<int:pk>/delete/', views.maintenancework_delete, name='maintenancework_delete'),
-    #url('staff_list/', views.staff_list, name='staff_list'),
 
 ]
-
