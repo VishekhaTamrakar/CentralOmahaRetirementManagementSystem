@@ -42,8 +42,31 @@ def about(request):
     return render(request, 'ORC/AboutUs.html')
 
 
-def workorder_list(request):
-    return render(request, 'ORC/workorder_list.html')
+@login_required
+def workorder_list(request): #resident_id):
+        workorder = Workorder.objects.filter()
+        return render(request, 'ORC/workorder_list.html', {'workorder': workorder})
+    #if request.user.is_resident:
+     #   workorder = get_object_or_404(Workorder, pk=workorder.pk)
+      #  return redirect(request, 'ORC/workorder_list.html', {'workorder': workorder})
+
+
+@login_required
+def workorder_new(request):
+    if request.method == "POST":
+        form = WorkorderForm(request.POST)
+        if form.is_valid():
+            newworkorder = form.save(commit=False)
+            newworkorder.created_date = timezone.now()
+            newworkorder.save()
+            workorder = Workorder.objects.filter(created_date__lte=timezone.now())
+            return render(request, 'ORC/workorder_list.html',
+                          {'workorder': workorder})
+            #return HttpResponseRedirect(reverse('ORC:workorder_list'))
+    else:
+        form = WorkorderForm()
+    # print("Else")
+    return render(request, 'ORC/workorder_new.html', {'form': form})
 
 
 @login_required
