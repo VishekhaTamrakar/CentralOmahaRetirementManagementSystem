@@ -1,0 +1,88 @@
+   {% block content %}
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    </head>
+    <body>
+    <style>
+        body {
+            background-color: ghostwhite ;
+            background-image: url("") ;
+        }
+    </style>
+    <br>
+      <br>
+      <br>
+
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'ORC:about' %}"><h1><u>Omaha Retirement Centre</a></h1></u>
+    <div id="wrapper">
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+        <h2  style="color:firebrick" align="center" ><b><i>Equipment Details</b></i></h2>
+    <br>
+
+        <table class="table table-bordered" style="background-color:white">
+            <thead>
+                        <tr class="bg-info" style="background:white">
+                <th>Equipment Id</th>
+                <th>Equipment Serial Number</th>
+                <th>Equipment Name</th>
+                <th>Equipment Description</th>
+                <th>Equipment Availability</th>
+                <th>Equipment Cost</th>
+                <th>Equipment Purchase Date</th>
+
+
+
+
+                <th colspan="6" >Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for equipment in equipments %}
+                <tr>
+
+                    <td>{{ equipment.equipment_id }}</td>
+                    <td>{{ equipment.equipment_serialnumber }}</td>
+                    <td>{{ equipment.equipment_name }}</td>
+                    <td>{{ equipment.equipment_description }}</td>
+                    <td>{{ equipment.is_available }}</td>
+                    <td>{{ equipment.equipment_cost }}</td>
+                    <td>{{ equipment.equipment_purchasedate }}</td>
+
+
+
+
+                        <td><a href="{% url 'ORC:equipment_edit' pk=equipment.pk%}" class="btn btn-warning">Edit</a>
+
+
+<td><a href="{% url 'ORC:equipment_delete' pk=equipment.pk%}" onclick="return confirm ('Are you sure you want to delete?')"
+                  class="btn btn-danger">Delete</a>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+        </table>
+ <td><a href="{% url 'ORC:equipment_new' %}"
+                           class="btn btn-primary">Add New Equipment</a>
+    </body>
+    </html>
+{% endblock %}
