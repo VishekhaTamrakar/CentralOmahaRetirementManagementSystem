@@ -54,5 +54,5 @@ urlpatterns = [
     path('maintenancework/new/', views.maintenancework_new, name='maintenancework_new'),
     path('maintenancework/<int:pk>/edit/', views.maintenancework_edit, name='maintenancework_edit'),
     path('maintenancework/<int:pk>/delete/', views.maintenancework_delete, name='maintenancework_delete'),
-
+    url(r'export/xls/$', views.export_workorders_excel, name='export_workorders_xls'),
 ]

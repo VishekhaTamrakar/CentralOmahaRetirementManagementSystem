@@ -22,6 +22,9 @@
     <h1 class ="probootsrap-card-heading"> Workorder Details</h1><br>
     <ul class="">
         <a href="{% url 'ORC:workorder_new' %}" style="padding-right: 15Px" class="row"><span class="btn btn-primary">New workorder</span></a>
+        {% if request.user.is_orc_staff %}
+            <a href="{% url 'ORC:export_workorders_xls' %}" style="padding-right: 15Px; padding-top: 5Px" class="row"><span class="btn btn-primary">Export</span></a>
+        {% endif %}
     </ul>
 
     <div class="content container">

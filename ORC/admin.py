@@ -73,6 +73,7 @@ def export_to_excel(modeladmin, request, queryset):
 export_to_excel.short_description = "Export to Excel"
 export_to_csv.short_description = 'Export to CSV'
 
+
 admin.site.register(User, UserAdmin)
 
 class ResidentList(admin.ModelAdmin):

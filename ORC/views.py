@@ -14,6 +14,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
 import datetime
+import xlwt
 import csv
 
 
@@ -40,6 +41,43 @@ def signup(request):
 
 def about(request):
     return render(request, 'ORC/AboutUs.html')
+
+
+@login_required
+def export_workorders_excel(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment;' \
+                                      'filename=workorders.csv'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Workorders')
+
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['resident', 'id', 'description', 'category', 'priority', 'property number', 'opened date', 'due date', 'closed date', 'open']
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    font_style.font.bold = False
+
+    workorders = Workorder.objects.all().values_list('resident_name', 'workorder_id', 'workorder_Description', 'workorder_category', 'workorder_priority', 'property_number', 'workorder_opendate', 'workorder_duedate', 'workorder_closedate', 'is_open')
+
+    for wo in workorders:
+        row_num += 1
+        for col_num in range(len(wo)):
+            value = wo[col_num]
+            if isinstance(value, datetime.datetime):
+                value = value.strftime('%d/%m/%Y')
+            if isinstance(value, Resident):
+                value = value.__str__()
+            if isinstance(value, Roomallotment):
+                value = value.__str__()
+            ws.write(row_num, col_num, value, font_style)
+
+    wb.save(response)
+    return response
 
 
 @login_required
