@@ -33,7 +33,7 @@ class EquipmentForm(forms.ModelForm):
 class MaintenanceWorkForm(forms.ModelForm):
     class Meta:
         model = MaintenanceWork
-        fields = ('maintenancework_id','maintenancework_description', 'workorder_id','maintenanceworker_name','property_number','equipment_name','maintenancework_cost','maintenancework_opendate','maintenancework_duedate','is_open','maintenancework_closedate')
+        fields = ('residentid', 'maintenancework_id','maintenancework_description', 'workorder_id','maintenanceworker_name','property_number','equipment_name','maintenancework_cost','maintenancework_opendate','maintenancework_duedate','is_open','maintenancework_closedate')
 
 class RoomallotmentForm(forms.ModelForm):
     class Meta:
