@@ -289,7 +289,6 @@ class MaintenanceWorker(models.Model):
 
 
 class MaintenanceWork(models.Model):
-    residentname = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='residentname')
     residentid = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='residentid')
     maintenancework_id=models.AutoField(auto_created=True,primary_key=True,max_length=6)
     maintenancework_description=models.CharField(max_length=50)
