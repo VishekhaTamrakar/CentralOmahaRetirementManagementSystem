@@ -41,6 +41,7 @@ urlpatterns = [
     path('resident/new/', views.resident_new, name='resident_new'),
     path('resident/<int:pk>/edit/', views.resident_edit, name='resident_edit'),
     path('resident/<int:pk>/delete/', views.resident_delete, name='resident_delete'),
+    path('resident/<int:pk>/workorderview/', views.resident_workorderview, name='resident_workorderview'),
     url('maintenance_worker_list/', views.maintenance_worker_list, name='maintenance_worker_list'),
     path('maintenance_worker/new/', views.maintenance_worker_new, name='maintenance_worker_new'),
     path('maintenance_worker/<int:pk>/edit/', views.maintenance_worker_edit, name='maintenance_worker_edit'),
@@ -57,6 +58,8 @@ urlpatterns = [
     path('maintenancework/new/', views.maintenancework_new, name='maintenancework_new'),
     path('maintenancework/<int:pk>/edit/', views.maintenancework_edit, name='maintenancework_edit'),
     path('maintenancework/<int:pk>/delete/', views.maintenancework_delete, name='maintenancework_delete'),
+    path('maintenancework/<int:pk>/workerview/', views.maintenancework_workerview, name='maintenancework_workerview'),
+
     url(r'export/xls/$', views.export_workorders_excel, name='export_workorders_xls'),
     url(r'^workorders_json/', views.WorkorderList.as_view()),
     url(r'^residents_json/', views.ResidentList.as_view()),

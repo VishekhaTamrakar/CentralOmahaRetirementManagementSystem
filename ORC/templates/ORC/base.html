@@ -60,7 +60,7 @@
          {% elif request.user.is_maintenanceworker %}
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'ORC:maintenancework_list' %}">
+              <a class="nav-link" href="{% url 'ORC:maintenancework_workerview' pk=request.user.id %}">
                 <span>Maintenance Work Details</span>
               </a>
             </li>
@@ -73,14 +73,9 @@
         {% elif request.user.is_resident %}
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'ORC:workorder_list' %}">
-                <span>Workorder Details</span>
-              </a>
-            </li>
+              <a class="nav-link" href="{% url 'ORC:resident_workorderview' pk=request.user.id %}">
 
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'ORC:maintenancework_list' %}">
-                <span>Maintenance Work Details</span>
+                <span>Workorder Details</span>
               </a>
             </li>
         {% endif %}

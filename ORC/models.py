@@ -41,8 +41,8 @@ class Resident(models.Model):
     resident_familymember_count=models.IntegerField()
     resident_petdetails=models.CharField(max_length=50)
     resident_contactdetails=models.CharField(max_length=10)
-    resident_startdate=models.DateField()
-    resident_enddate=models.DateField()
+    resident_startdate=models.DateField(default=timezone.now)
+    resident_enddate=models.DateField(default=timezone.now)
     created_date = models.DateTimeField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
@@ -62,34 +62,6 @@ class Resident(models.Model):
         verbose_name = 'Resident'
         verbose_name_plural = 'Resident'
 
-class MaintenanceWorker(models.Model):
-    worker_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    maintenanceworker_name = models.CharField(max_length=50)
-    worker_emailaddress=models.CharField(max_length=50)
-    worker_address=models.CharField(max_length=50)
-    worker_yearsofexperience=models.IntegerField()
-    worker_contactdetails=models.CharField(max_length=10)
-    worker_startdate=models.DateField()
-    worker_enddate=models.DateField()
-    created_date = models.DateField(
-        default=timezone.now)
-    updated_date = models.DateTimeField(auto_now_add=True)
-
-    def created(self):
-        self.created_date = timezone.now()
-        self.save()
-
-    def updated(self):
-        self.updated_date = timezone.now()
-        self.save()
-
-    def __str__(self):
-        return str(self.maintenanceworker_name)
-
-    class Meta:
-        verbose_name = 'MaintenanceWorker'
-        verbose_name_plural = 'MaintenanceWorker'
 
 class Orc_Staff(models.Model):
     orc_staff_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
@@ -100,8 +72,8 @@ class Orc_Staff(models.Model):
     orc_staff_yearsofexperience=models.IntegerField()
     orc_staff_contactdetails=models.CharField(max_length=10)
     orc_staff_position=models.CharField(max_length=50)
-    orc_staff_startdate=models.DateField()
-    orc_staff_enddate=models.DateField()
+    orc_staff_startdate=models.DateTimeField(default=timezone.now)
+    orc_staff_enddate=models.DateTimeField(default=timezone.now)
     created_date = models.DateField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
@@ -226,15 +198,16 @@ workorder_cat=(
     ('Other Maintenance Work','Other Maintenance Work'),
 )
 class Workorder(models.Model):
-    resident_name = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='residents')
+    resident_name = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='resname')
+    resident_id = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='resid')
     workorder_id = models.CharField(auto_created=True,primary_key=True,max_length=20)
     workorder_Description= models.CharField(max_length=50)
     workorder_category=models.CharField(max_length=50,choices=workorder_cat, default='--')
     workorder_priority=models.CharField(max_length=50,choices=priority_level, default='--')
     property_number=models.ForeignKey(Roomallotment,on_delete=models.CASCADE,related_name='wo1')
-    workorder_opendate=models.DateTimeField()
-    workorder_duedate = models.DateTimeField()
-    workorder_closedate=models.DateTimeField(null=False)
+    workorder_opendate=models.DateTimeField(default=timezone.now )
+    workorder_duedate = models.DateTimeField(default=timezone.now)
+    workorder_closedate=models.DateTimeField(default=timezone.now)
     is_open=models.BooleanField(default=True, blank=False, null=False)
 
     created_date = models.DateField(
@@ -264,8 +237,8 @@ class Equipment(models.Model):
     equipment_description=models.CharField(max_length=50)
     is_available=models.BooleanField(default=True, blank=False, null=False)
     equipment_cost=models.IntegerField()
-    equipment_purchasedate=models.DateField()
-    created_date = models.DateField(
+    equipment_purchasedate=models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
 
@@ -285,18 +258,51 @@ class Equipment(models.Model):
         verbose_name_plural = 'Equipment'
 
 
+class MaintenanceWorker(models.Model):
+    worker_id = models.AutoField(auto_created=True,primary_key=True,max_length=6)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    maintenanceworker_name = models.CharField(max_length=50)
+    worker_emailaddress=models.CharField(max_length=50)
+    worker_address=models.CharField(max_length=50)
+    worker_yearsofexperience=models.IntegerField()
+    worker_contactdetails=models.CharField(max_length=10)
+    worker_startdate=models.DateField(default=timezone.now)
+    worker_enddate=models.DateField(default=timezone.now)
+    created_date = models.DateField(
+        default=timezone.now)
+    updated_date = models.DateTimeField(auto_now_add=True)
+
+    def created(self):
+        self.created_date = timezone.now()
+        self.save()
+
+    def updated(self):
+        self.updated_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return str(self.maintenanceworker_name)
+
+    class Meta:
+        verbose_name = 'MaintenanceWorker'
+        verbose_name_plural = 'MaintenanceWorker'
+
+
 class MaintenanceWork(models.Model):
+    residentname = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='residentname')
+    residentid = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='residentid')
     maintenancework_id=models.AutoField(auto_created=True,primary_key=True,max_length=6)
     maintenancework_description=models.CharField(max_length=50)
     workorder_id = models.ForeignKey(Workorder, on_delete=models.CASCADE, related_name='mw1')
+    worker_id = models.ForeignKey(MaintenanceWorker,on_delete=models.CASCADE, blank = True, null=True)
     maintenanceworker_name = models.ForeignKey(MaintenanceWorker, on_delete=models.CASCADE, related_name='mw2')
     equipment_name=models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name='mw4')
     property_number=models.ForeignKey(Roomallotment,on_delete=models.CASCADE,related_name='mw3')
     maintenancework_cost=models.IntegerField()
-    maintenancework_opendate=models.DateTimeField()
-    maintenancework_duedate = models.DateTimeField()
+    maintenancework_opendate=models.DateTimeField(default=timezone.now)
+    maintenancework_duedate = models.DateTimeField(default=timezone.now)
     is_open=models.BooleanField(default=True, blank=False, null=False)
-    maintenancework_closedate=models.DateTimeField(blank=True, null=True)
+    maintenancework_closedate=models.DateTimeField(default=timezone.now)
     created_date = models.DateField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)

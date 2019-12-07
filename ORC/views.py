@@ -203,9 +203,20 @@ def maintenancework_delete(request, pk):
    maintenancework.delete()
    return redirect('ORC:maintenancework_list')
 
+@login_required()
+def maintenancework_workerview(request, pk):
+    print(" pk of logged in user",pk)
+    worker=MaintenanceWorker.objects.get(user_id = pk)
+    print(" object",worker)
+    workerid=worker.worker_id
+    print("worker id ",workerid)
+    workerview = [x for x in (MaintenanceWork.objects.filter(maintenanceworker_name_id=workerid))]
+    print("workder assigned to worker",workerview)
+    return render(request, 'ORC/maintenancework_workerview.html',
+                  {'workerview': workerview})
 
 
-
+@login_required()
 def resident_list(request):
     resident = Resident.objects.filter(created_date__lte=timezone.now())
     return render(request, 'ORC/resident_list.html',
@@ -250,6 +261,17 @@ def resident_delete(request, pk):
    resident = get_object_or_404(Resident, pk=pk)
    resident.delete()
    return redirect('ORC:resident_list')
+
+@login_required()
+def resident_workorderview(request, pk):
+    print(" pk of logged in user",pk)
+    Res=Resident.objects.get(user_id = pk)
+    print(" object",Resident)
+    res_id=Res.resident_id
+    workerview = [x for x in (Workorder.objects.filter(resident_id=res_id))]
+    print("workder assigned to worker",workerview)
+    return render(request, 'ORC/resident_workorderview.html',
+                  {'workerview': workerview})
 
 
 

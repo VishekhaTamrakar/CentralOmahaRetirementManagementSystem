@@ -22,7 +22,7 @@ class Orc_StaffForm(forms.ModelForm):
 class WorkorderForm(forms.ModelForm):
     class Meta:
         model = Workorder
-        fields = ('resident_name', 'workorder_id', 'workorder_Description', 'workorder_category','workorder_priority','property_number', 'workorder_opendate','workorder_duedate','workorder_closedate','is_open')
+        fields = ('resident_name', 'workorder_id', 'resident_id', 'workorder_Description', 'workorder_category','workorder_priority','property_number', 'workorder_opendate','workorder_duedate','workorder_closedate','is_open')
 
 
 class EquipmentForm(forms.ModelForm):
