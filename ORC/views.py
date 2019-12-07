@@ -17,6 +17,11 @@ import datetime
 import xlwt
 import csv
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import *
+
 
 def home(request):
     return render(request, 'ORC/home.html',
@@ -473,3 +478,17 @@ def workorder_delete(request, pk):
    workorder = get_object_or_404(Workorder, pk=pk)
    workorder.delete()
    return redirect('ORC:workorder_list')
+
+
+class WorkorderList(APIView):
+    def get(self, request):
+        workorders_json = Workorder.objects.all()
+        serializer = WorkorderSerializer(workorders_json, many=True)
+        return Response(serializer.data)
+
+
+class ResidentList(APIView):
+    def get(self, request):
+        residents_json = Resident.objects.all()
+        serializer = ResidentSerializer(residents_json, many=True)
+        return Response(serializer.data)

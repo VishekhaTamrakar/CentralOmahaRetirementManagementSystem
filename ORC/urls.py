@@ -4,6 +4,9 @@ from django.urls import path,re_path
 from . import views as ORC_views
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
+from rest_framework.urlpatterns import format_suffix_patterns
+
+
 app_name = 'ORC'
 urlpatterns = [
 
@@ -55,4 +58,8 @@ urlpatterns = [
     path('maintenancework/<int:pk>/edit/', views.maintenancework_edit, name='maintenancework_edit'),
     path('maintenancework/<int:pk>/delete/', views.maintenancework_delete, name='maintenancework_delete'),
     url(r'export/xls/$', views.export_workorders_excel, name='export_workorders_xls'),
+    url(r'^workorders_json/', views.WorkorderList.as_view()),
+    url(r'^residents_json/', views.ResidentList.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
