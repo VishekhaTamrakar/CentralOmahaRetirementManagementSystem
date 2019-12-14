@@ -160,8 +160,8 @@ class Roomallotment(models.Model):
     resident_name = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='residents1')
     property_number = models.CharField(max_length=50,choices=roomno,default='--')
     property_floor=models.CharField(max_length=50,choices=Floor,default='--')
-    allotment_startdate=models.DateTimeField()
-    allotment_enddate=models.DateTimeField()
+    allotment_startdate=models.DateTimeField(default=timezone.now())
+    allotment_enddate=models.DateTimeField(default=timezone.now())
     created_date = models.DateField(
         default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
@@ -200,7 +200,7 @@ workorder_cat=(
 class Workorder(models.Model):
     resident_name = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='resname')
     resident_id = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='resid')
-    workorder_id = models.CharField(auto_created=True,primary_key=True,max_length=20)
+    workorder_id = models.IntegerField(primary_key=True,max_length=20)
     workorder_Description= models.CharField(max_length=50)
     workorder_category=models.CharField(max_length=50,choices=workorder_cat, default='--')
     workorder_priority=models.CharField(max_length=50,choices=priority_level, default='--')

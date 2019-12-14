@@ -1,41 +1,13 @@
+{% extends 'ORC/base.html' %}
    {% block content %}
 
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-    </head>
-    <body>
-    <style>
-        body {
-            background-color: ghostwhite ;
-            background-image: url("") ;
-        }
-    </style>
-    <br>
-      <br>
-      <br>
-
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'ORC:about' %}"><h1><u>Omaha Retirement Centre</a></h1></u>
-    <div id="wrapper">
 
 
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+        <h2  style="color:firebrick" align="center" ><b>EQUIPMENT DETAILS</b></h2>
     <br>
 
-
-        <h2  style="color:firebrick" align="center" ><b><i>Equipment Details</b></i></h2>
-    <br>
-
-        <table class="table table-bordered" style="background-color:white">
+        <table class="table-bordered" style="background-color:white" align="center">
             <thead>
                         <tr class="bg-info" style="background:white">
                 <th>Equipment Id</th>
@@ -65,14 +37,16 @@
                     <td>{{ equipment.equipment_purchasedate }}</td>
 
 
-
-
+{% if user.is_maintenanceworker %}
+ <td><a href=""
+                  class="btn btn-danger">Access Denied</a>
+    {% else  %}
                         <td><a href="{% url 'ORC:equipment_edit' pk=equipment.pk%}" class="btn btn-warning">Edit</a>
 
 
 <td><a href="{% url 'ORC:equipment_delete' pk=equipment.pk%}" onclick="return confirm ('Are you sure you want to delete?')"
                   class="btn btn-danger">Delete</a>
-
+{% endif %}
                 </tr>
 
             {% endfor %}
@@ -81,8 +55,15 @@
 
         </table>
         </table>
+       <br>
+
+       {% if user.is_maintenanceworker %}
+        <td><a href=""
+                  class="btn btn-danger">Access Denied</a>
+          {% else  %}
  <td><a href="{% url 'ORC:equipment_new' %}"
                            class="btn btn-primary">Add New Equipment</a>
+{% endif %}
     </body>
     </html>
 {% endblock %}
