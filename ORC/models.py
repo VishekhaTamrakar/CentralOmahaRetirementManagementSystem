@@ -200,7 +200,7 @@ workorder_cat=(
 class Workorder(models.Model):
     resident_name = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='resname')
     resident_id = models.ForeignKey(Resident, on_delete=models.CASCADE, related_name='resid')
-    workorder_id = models.IntegerField(primary_key=True)
+    workorder_id = models.AutoField(auto_created=True, primary_key=True, max_length=6)
     workorder_Description= models.CharField(max_length=50)
     workorder_category=models.CharField(max_length=50,choices=workorder_cat, default='--')
     workorder_priority=models.CharField(max_length=50,choices=priority_level, default='--')
