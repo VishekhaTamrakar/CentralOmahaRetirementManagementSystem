@@ -43,7 +43,6 @@ class maintenanceworker(unittest.TestCase):
         driver.find_element_by_id("id_maintenancework_closedate").send_keys()
         driver.find_element_by_xpath("//*[@id='content']/form/button").click()
         time.sleep(3)
-
         driver.get("https://team3-orc-project.herokuapp.com/equipment_list/")
         time.sleep(2)
         driver.get("https://team3-orc-project.herokuapp.com/about/")
