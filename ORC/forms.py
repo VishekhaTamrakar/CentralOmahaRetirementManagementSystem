@@ -4,7 +4,7 @@ from .models import Resident,MaintenanceWorker,Orc_Staff,Equipment,MaintenanceWo
 class ResidentForm(forms.ModelForm):
     class Meta:
         model = Resident
-        fields = ('resident_id', 'resident_name', 'resident_occupation', 'resident_emailaddress','resident_marital_status', 'resident_familymember_count','resident_petdetails','resident_contactdetails','resident_startdate', 'resident_enddate')
+        fields = ('resident_id', 'user','resident_name', 'resident_occupation', 'resident_emailaddress','resident_marital_status', 'resident_familymember_count','resident_petdetails','resident_contactdetails','resident_startdate', 'resident_enddate')
 
 
 class MaintenanceWorkerForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class MaintenanceWorkerForm(forms.ModelForm):
 class Orc_StaffForm(forms.ModelForm):
     class Meta:
         model = Orc_Staff
-        fields = ('orc_staff_id', 'orc_staff_name', 'orc_staff_emailaddress', 'orc_staff_address','orc_staff_yearsofexperience', 'orc_staff_contactdetails','orc_staff_position','orc_staff_startdate','orc_staff_enddate')
+        fields = ('orc_staff_id', 'user','orc_staff_name', 'orc_staff_emailaddress', 'orc_staff_address','orc_staff_yearsofexperience', 'orc_staff_contactdetails','orc_staff_position','orc_staff_startdate','orc_staff_enddate')
 
 
 class WorkorderForm(forms.ModelForm):
